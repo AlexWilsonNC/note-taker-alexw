@@ -1,6 +1,17 @@
 [
     {
         "title":"Test Title",
-        "text":"Test text"
+        "text":"This is test text.",
+        "id": "1"
+    },
+    {
+        "title":"Best Movie Series",
+        "text":"Lord of the Rings",
+        "id": "2"
+    },
+    {
+        "title":"Greatest Switch Game",
+        "text":"Legend of Zelda: Breath of the Wild",
+        "id": "3"
     }
 ]

@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 
-const PORT = 3009;
+const PORT = process.env.PORT || 3009;
 const app = express();
 
 app.use(express.json());
@@ -11,7 +11,7 @@ app.use(express.static('public'));
 
 // grabbing from homepage
 app.get('/', (req, res) =>
-    res.sendFile(path.join(__dirname, 'public/index.html'))
+    res.sendFile(path.join(__dirname, '/index.html'))
 );
 
 // route to notes.html page
@@ -45,7 +45,7 @@ app.post('/api/notes', (req, res) =>
 );
 
 // default to index.html
-app.get('*', (req, res) => res.redirect('public/index.html'));
+app.get('*', (req, res) => res.redirect('/index.html'));
 
 app.listen(PORT, function() {
     console.log(`Server is listening on PORT: http://localhost:${PORT} 📝`);

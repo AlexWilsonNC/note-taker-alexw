@@ -24,9 +24,9 @@ app.get('/api/notes', (req, res) =>
 );
 
 app.post('/api/notes', (req, res) =>
-    fs.readFile(path.join(__dirname, './db/db.json'), 'utf8', function(error, res) {
-        if (error) {
-            console.log(error);
+    fs.readFile(path.join(__dirname, './db/db.json'), 'utf8', function(err, res) {
+        if (err) {
+            console.log(err);
         }
         const notes = JSON.parse(res);
         const noteRequest = req.body;
@@ -36,10 +36,11 @@ app.post('/api/notes', (req, res) =>
             text: noteRequest.text,
             id: newNoteId
         };
-        notes.push(newNote), res.json(newNote);
-        fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(notes, null, 2), function(error) {
-            if (error) throw error;
-        })
+        notes.push(newNote)
+        // JSON.stringify(notes);
+        fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(notes, null, 2), function(err) {
+            if (err) throw err;
+        });
     })
 );
 

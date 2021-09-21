@@ -9,12 +9,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-// grabbing from homepage
 app.get('/', (req, res) =>
     res.sendFile(path.join(__dirname, '/index.html'))
 );
 
-// route to notes.html page
 app.get('/notes', (req, res) =>
     res.sendFile(path.join(__dirname, 'public/notes.html'))
 );
@@ -37,14 +35,12 @@ app.post('/api/notes', (req, res) =>
             id: newNoteId
         };
         notes.push(newNote)
-        // JSON.stringify(notes);
         fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(notes, null, 2), function(err) {
             if (err) throw err;
         });
     })
 );
 
-// default to index.html
 app.get('*', (req, res) => res.redirect('/index.html'));
 
 app.listen(PORT, function() {

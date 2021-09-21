@@ -22,11 +22,11 @@ app.get('/api/notes', (req, res) =>
 );
 
 app.post('/api/notes', (req, res) =>
-    fs.readFile(path.join(__dirname, './db/db.json'), 'utf8', function(err, res) {
+    fs.readFile(path.join(__dirname, './db/db.json'), 'utf8', function(err, data) {
         if (err) {
             console.log(err);
         }
-        const notes = JSON.parse(res);
+        const notes = JSON.parse(data);
         const noteRequest = req.body;
         const newNoteId = notes.length + 1;
         const newNote = {
@@ -35,8 +35,10 @@ app.post('/api/notes', (req, res) =>
             id: newNoteId
         };
         notes.push(newNote)
+    
         fs.writeFile(path.join(__dirname, './db/db.json'), JSON.stringify(notes, null, 2), function(err) {
             if (err) throw err;
+            res.json('success')
         });
     })
 );

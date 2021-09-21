@@ -12,12 +12,12 @@ if (window.location.pathname === '/notes') {
   noteList = document.querySelectorAll('.list-container .list-group');
 }
 
-// Shows an element
+// Show an element
 const show = (elem) => {
   elem.style.display = 'inline';
 };
 
-// Hides an element
+// Hide an element
 const hide = (elem) => {
   elem.style.display = 'none';
 };
@@ -40,8 +40,7 @@ const saveNote = (note) =>
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(note),
-  }).then(response => response.json())
-  .then(data => console.log(data))
+  });
 
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
@@ -68,14 +67,14 @@ const renderActiveNote = () => {
 };
 
 const handleNoteSave = () => {
-  console.log("handleNoteSave running")
   const newNote = {
     title: noteTitle.value,
     text: noteText.value,
   };
-  saveNote(newNote)
+  saveNote(newNote).then(() => {
     getAndRenderNotes();
     renderActiveNote();
+  });
 };
 
 // Delete the clicked note
